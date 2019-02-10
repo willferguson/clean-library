@@ -1,15 +1,13 @@
 package xyz.willferguson.library.domain.entity;
 
-import xyz.willferguson.library.domain.exceptions.BookNotAvailableException;
-
 import java.time.Duration;
 import java.time.Instant;
 import java.util.UUID;
 
 //TODO Consider equals method - is it id, or isbn?
-public class Book {
+public class Book implements Identifiable {
 
-    private final UUID uuid;
+    private final UUID id;
     private final String isbn13;
     private final String title;
     private final String author;
@@ -23,7 +21,7 @@ public class Book {
 
 
     public Book(String isbn13, String title, String author, Duration loanDuration, LoanStatus loanStatus) {
-        this.uuid = UUID.randomUUID();
+        this.id = UUID.randomUUID();
         this.isbn13 = isbn13;
         this.title = title;
         this.author = author;
@@ -31,8 +29,8 @@ public class Book {
         this.loanStatus = loanStatus;
     }
 
-    public UUID getUuid() {
-        return uuid;
+    public UUID getId() {
+        return id;
     }
 
     public String getIsbn13() {
@@ -68,5 +66,12 @@ public class Book {
         return loanStatus == LoanStatus.AVAILABLE;
     }
 
+    public Loan borrow(UUID borrowerId) {
+        this.loanStatus = LoanStatus.ON_LOAN;
+        return new Loan(borrowerId, this.id, this.getReturnDate());
+    }
 
+    public void returnBook() {
+        this.loanStatus = LoanStatus.AVAILABLE;
+    }
 }

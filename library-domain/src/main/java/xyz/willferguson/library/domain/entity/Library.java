@@ -1,13 +1,8 @@
 package xyz.willferguson.library.domain.entity;
 
-import xyz.willferguson.library.domain.exceptions.BookNotAvailableException;
-import xyz.willferguson.library.domain.exceptions.LoanNotAllowedException;
-
-import javax.swing.plaf.BorderUIResource;
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.UUID;
 
 public class Library {
 
@@ -27,22 +22,17 @@ public class Library {
     }
 
     /**
-     * Checks the book is available, calculates the return date, and returns a Loan.
-     * TODO - This doesn't feel right. How can we surface why we can't borrow, into a more expressive & testable structure.
+     * Determines whether the Library will allow the borrower to borrow the book.
+     * Different libraries have different rules - thus it is the responsibility of the library to determine.
+     *
      * @param borrower
      * @param book
      * @return
      */
-    public Loan borrowBook(Person borrower, Book book) throws BookNotAvailableException, LoanNotAllowedException {
-        if (!book.isAvailable()) throw new BookNotAvailableException(book.getTitle() + " not available");
-        if (!canBorrow(borrower)) throw new LoanNotAllowedException("Loan not allowed");
-        //TODO We're not setting the book to be ON_LOAN!
-        return new Loan(borrower.getUuid(), book.getUuid(), book.getReturnDate());
-    }
-
-    private boolean canBorrow(Person borrower) {
+    public boolean canBorrow(Person borrower, Book book) {
         return true;
     }
 
 
 }
+

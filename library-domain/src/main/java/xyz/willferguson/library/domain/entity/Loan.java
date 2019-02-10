@@ -3,22 +3,22 @@ package xyz.willferguson.library.domain.entity;
 import java.time.Instant;
 import java.util.UUID;
 
-public class Loan {
+public class Loan implements Identifiable {
 
-    private UUID uuid;
+    private UUID id;
     private UUID borrowerId;
     private UUID bookId;
     private Instant returnDate;
 
     public Loan(UUID borrowerId, UUID bookId, Instant returnDate) {
-        this.uuid = UUID.randomUUID();
+        this.id = UUID.randomUUID();
         this.borrowerId = borrowerId;
         this.bookId = bookId;
         this.returnDate = returnDate;
     }
 
-    public UUID getUuid() {
-        return uuid;
+    public UUID getId() {
+        return id;
     }
 
     public UUID getBorrowerId() {

@@ -7,14 +7,13 @@ import java.util.UUID;
 
 /**
  * By default everyone is a Borrower.
- * You can't borrow if you have outstanding fines.
  */
-public class Person {
+public class Person implements Identifiable {
 
-    private UUID uuid;
+    private UUID id;
     private String name;
     private Set<Role> roles = new HashSet<>();
-    private BigDecimal outstandindFines;
+    private BigDecimal outstandingFines;
 
     public Person(String name) {
         this(name, Role.BORROWER);
@@ -25,15 +24,15 @@ public class Person {
     }
 
     public Person(String name, Set<Role> roles) {
-        this.uuid = UUID.randomUUID();
+        this.id = UUID.randomUUID();
         this.name = name;
         this.roles.addAll(roles);
         this.roles.add(Role.BORROWER);
-        outstandindFines = BigDecimal.ZERO;
+        outstandingFines = BigDecimal.ZERO;
     }
 
-    public UUID getUuid() {
-        return uuid;
+    public UUID getId() {
+        return id;
     }
 
     public String getName() {
@@ -44,8 +43,8 @@ public class Person {
         return roles;
     }
 
-    public BigDecimal getOutstandindFines() {
-        return outstandindFines;
+    public BigDecimal getOutstandingFines() {
+        return outstandingFines;
     }
 
     public boolean isLibrarian() {
@@ -53,7 +52,7 @@ public class Person {
     }
 
     public BigDecimal addFine(BigDecimal bigDecimal) {
-        this.outstandindFines = this.outstandindFines.add(bigDecimal);
-        return this.outstandindFines;
+        this.outstandingFines = this.outstandingFines.add(bigDecimal);
+        return this.outstandingFines;
     }
 }

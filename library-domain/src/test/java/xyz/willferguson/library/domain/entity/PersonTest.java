@@ -11,7 +11,7 @@ class PersonTest {
         Person person = new Person("");
         person.addFine(BigDecimal.TEN);
         person.addFine(BigDecimal.ONE);
-        assertEquals(BigDecimal.valueOf(11), person.getOutstandindFines(), "Outstanding fines should be 11");
+        assertEquals(BigDecimal.valueOf(11), person.getOutstandingFines(), "Outstanding fines should be 11");
 
     }
 }

@@ -11,6 +11,9 @@
     <modules>
         <module>library-domain</module>
         <module>library-application</module>
+        <module>library-data</module>
+        <module>library-rest</module>
+        <module>library-bootstrap</module>
     </modules>
 
     <build>

@@ -8,12 +8,12 @@ import xyz.willferguson.library.domain.repository.BookRepository;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ListBooks {
+public class ListBooksUseCase {
 
     BookRepository bookRepository;
     DTOMapper<BookDTO, Book> mapper;
 
-    public ListBooks(BookRepository bookRepository, DTOMapper<BookDTO, Book> mapper) {
+    public ListBooksUseCase(BookRepository bookRepository, DTOMapper<BookDTO, Book> mapper) {
         this.bookRepository = bookRepository;
         this.mapper = mapper;
     }
@@ -21,7 +21,7 @@ public class ListBooks {
     public List<BookDTO> listBooks() {
         return bookRepository.list()
                 .stream()
-                .map(mapper::toDTO)
+                .map(entity -> mapper.toDTO(entity, BookDTO.class))
                 .collect(Collectors.toList());
     }
 
